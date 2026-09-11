@@ -1,0 +1,72 @@
+{
+  "gerado_em": "2026-09-09T18:42:56.430106+00:00",
+  "data_referencia_hoje": "2026-09-09",
+  "data_previsao": "2026-09-10",
+  "horarios_imputados_hoje": {
+    "Temp. Ins. (C)": 8,
+    "Temp. Max. (C)": 8,
+    "Temp. Min. (C)": 8,
+    "Umi. Ins. (%)": 8,
+    "Umi. Max. (%)": 8,
+    "Umi. Min. (%)": 8,
+    "Pto Orvalho Ins. (C)": 8,
+    "Pto Orvalho Max. (C)": 8,
+    "Pto Orvalho Min. (C)": 8,
+    "Pressao Ins. (hPa)": 8,
+    "Pressao Max. (hPa)": 8,
+    "Pressao Min. (hPa)": 8,
+    "Vel. Vento (m-s)": 8,
+    "Dir. Vento (m-s)": 8,
+    "Raj. Vento (m-s)": 8
+  },
+  "previsao": {
+    "temperatura_media": 26.9,
+    "temperatura_maxima": 32.7,
+    "temperatura_minima": 21.8
+  },
+  "detalhes_modelo": {
+    "algoritmo": "Random Forest Regressor (scikit-learn)",
+    "parametros": {
+      "n_estimators": 15,
+      "max_depth": 8,
+      "min_samples_leaf": 2,
+      "random_state": 42
+    },
+    "temp_media": {
+      "previsao": 26.9,
+      "erro_medio_esperado_mae": 0.78,
+      "dias_usados_no_treino": 186,
+      "importancia_variaveis": {
+        "Temperatura media de hoje": 0.3253,
+        "Pressao media de hoje": 0.1504,
+        "Pressao minima de hoje": 0.0854,
+        "Velocidade media do vento hoje": 0.0718,
+        "Epoca do ano (componente sazonal 2)": 0.0581
+      }
+    },
+    "temp_maxima": {
+      "previsao": 32.7,
+      "erro_medio_esperado_mae": 1.11,
+      "dias_usados_no_treino": 186,
+      "importancia_variaveis": {
+        "Temperatura media de hoje": 0.1751,
+        "Temperatura maxima de hoje": 0.1685,
+        "Velocidade media do vento hoje": 0.1243,
+        "Pressao minima de hoje": 0.0718,
+        "Pressao media de hoje": 0.0646
+      }
+    },
+    "temp_minima": {
+      "previsao": 21.8,
+      "erro_medio_esperado_mae": 0.91,
+      "dias_usados_no_treino": 186,
+      "importancia_variaveis": {
+        "Pressao media - media dos ultimos 3 dias": 0.2759,
+        "Pressao media - media dos ultimos 7 dias": 0.1927,
+        "Pressao media de hoje": 0.0833,
+        "Pressao minima de hoje": 0.0516,
+        "Ponto de orvalho medio de hoje": 0.0386
+      }
+    }
+  }
+}
