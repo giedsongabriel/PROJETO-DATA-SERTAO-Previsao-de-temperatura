@@ -40,7 +40,7 @@ SCRIPT_PREVISAO = os.path.join(
     "previsao_imputado.py"
 )
 
-ARQUIVO_PREVISAO = os.path.join(C
+ARQUIVO_PREVISAO = os.path.join(
     PASTA_SITE,
     "historico_previsoes2.csv"
 )
