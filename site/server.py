@@ -40,7 +40,7 @@ SCRIPT_PREVISAO = os.path.join(
     "previsao_imputado.py"
 )
 
-ARQUIVO_PREVISAO = os.path.join(
+ARQUIVO_PREVISAO = os.path.join(C
     PASTA_SITE,
     "historico_previsoes2.csv"
 )
@@ -1821,7 +1821,7 @@ def api_climatempo():
                     "Chrome/140.0 Safari/537.36"
                 )
             },
-            timeout=15
+            timeout=30
         )
 
         resposta.raise_for_status()
