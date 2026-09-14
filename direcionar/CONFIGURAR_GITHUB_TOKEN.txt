@@ -1,0 +1,33 @@
+CONFIGURAÇÃO DO TOKEN DO GITHUB
+================================
+
+1. Crie um Fine-grained Personal Access Token no GitHub.
+
+2. Dê acesso somente ao repositório que será usado para o redirecionador.
+
+3. Em Repository permissions, permita:
+
+   Contents: Read and write
+
+4. No PowerShell, execute:
+
+[Environment]::SetEnvironmentVariable(
+    "GITHUB_TOKEN",
+    "COLE_SEU_TOKEN_AQUI",
+    "User"
+)
+
+5. Feche e abra o PowerShell.
+
+6. Teste:
+
+if ($env:GITHUB_TOKEN) {
+    Write-Host "GITHUB_TOKEN configurado."
+} else {
+    Write-Host "GITHUB_TOKEN NÃO configurado."
+}
+
+NÃO coloque o token no index.html.
+NÃO coloque o token no endereco.json.
+NÃO faça commit do token no GitHub.
+NÃO envie o token em prints ou mensagens.

@@ -27,7 +27,8 @@ ARQUIVO_SAIDA = os.path.abspath(
 with sync_playwright() as p:
 
     browser = p.chromium.launch(
-        headless=True
+        headless=True,
+        executable_path=r"C:\Users\Administrator\AppData\Local\ms-playwright\chromium-1234\chrome-win64\chrome.exe"
     )
 
     page = browser.new_page()
