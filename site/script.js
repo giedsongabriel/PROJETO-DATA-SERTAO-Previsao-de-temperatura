@@ -934,314 +934,318 @@ function formatarDirecao(valor) {
     );
 
 }
-
-
-// ==========================================
-// CARREGAR PREVISÃO
-// ==========================================
-
-async function carregarPrevisao() {
-
-    try {
-
-        const resposta =
-            await fetch(
-                "/api/previsao"
-            );
-
-
-        if (!resposta.ok) {
-
-            throw new Error(
-                "Não foi possível carregar a previsão."
-            );
-
-        }
-
-
-        const dados =
-            await resposta.json();
-
-
-        const previsao =
-            dados.previsao || {};
-
-
-        const real =
-            dados.real || {};
-
-
-        const diferenca =
-            dados.diferenca || {};
-
-
         // ==========================================
-        // MÉDIA PREVISTA
+        // CARREGAR PREVISÃO
         // ==========================================
 
-        const prevMed =
-            document.getElementById(
-                "prev_med"
-            );
+        async function carregarPrevisao() {
+
+            try {
+
+                const resposta =
+                    await fetch(
+                        "/api/previsao"
+                    );
 
 
-        if (prevMed) {
+                if (!resposta.ok) {
 
-            prevMed.textContent =
-                formatarNumero(
-                    previsao.temperatura_media
+                    throw new Error(
+                        "Não foi possível carregar a previsão."
+                    );
+
+                }
+
+
+                const dados =
+                    await resposta.json();
+
+
+                const previsao =
+                    dados.previsao || {};
+
+
+                const real =
+                    dados.real || {};
+
+
+                const diferenca =
+                    dados.diferenca || {};
+
+
+                // ==========================================
+                // MÉDIA PREVISTA
+                // ==========================================
+
+                const prevMed =
+                    document.getElementById(
+                        "prev_med"
+                    );
+
+
+                if (prevMed) {
+
+                    prevMed.textContent =
+                        formatarNumero(
+                            previsao.temperatura_media
+                        );
+
+                }
+
+
+                // ==========================================
+                // MÍNIMA PREVISTA
+                // ==========================================
+
+                const prevMin =
+                    document.getElementById(
+                        "prev_min"
+                    );
+
+
+                if (prevMin) {
+
+                    const valor =
+                        formatarNumero(
+                            previsao.temperatura_minima
+                        );
+
+
+                    prevMin.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // MÁXIMA PREVISTA
+                // ==========================================
+
+                const prevMax =
+                    document.getElementById(
+                        "prev_max"
+                    );
+
+
+                if (prevMax) {
+
+                    const valor =
+                        formatarNumero(
+                            previsao.temperatura_maxima
+                        );
+
+
+                    prevMax.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // DATA DA PREVISÃO
+                // ==========================================
+
+                const dataPrevisao =
+                    document.getElementById(
+                        "data-previsao"
+                    );
+
+
+                if (dataPrevisao) {
+
+                    dataPrevisao.textContent =
+                        dados.data_prevista ||
+                        "--";
+
+                }
+
+
+                // ==========================================
+                // PREVISÃO NA TELA DE PREVISÕES
+                // ==========================================
+
+                const previsaoTelaMedia =
+                    document.getElementById(
+                        "previsao-tela-media"
+                    );
+
+
+                if (previsaoTelaMedia) {
+
+                    previsaoTelaMedia.textContent =
+                        formatarNumero(
+                            previsao.temperatura_media
+                        );
+
+                }
+
+
+                // ==========================================
+                // MÍNIMA NA TELA DE PREVISÕES
+                // ==========================================
+
+                const previsaoTelaMin =
+                    document.getElementById(
+                        "previsao-tela-min"
+                    );
+
+
+                if (previsaoTelaMin) {
+
+                    const valor =
+                        formatarNumero(
+                            previsao.temperatura_minima
+                        );
+
+
+                    previsaoTelaMin.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // MÁXIMA NA TELA DE PREVISÕES
+                // ==========================================
+
+                const previsaoTelaMax =
+                    document.getElementById(
+                        "previsao-tela-max"
+                    );
+
+
+                if (previsaoTelaMax) {
+
+                    const valor =
+                        formatarNumero(
+                            previsao.temperatura_maxima
+                        );
+
+
+                    previsaoTelaMax.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // DIFERENÇA MÉDIA
+                // ==========================================
+
+                const diferencaMedia =
+                    document.getElementById(
+                        "previsao-diferenca-media"
+                    );
+
+
+                if (diferencaMedia) {
+
+                    const valor =
+                        formatarNumero(
+                            diferenca.media
+                        );
+
+
+                    diferencaMedia.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // DIFERENÇA MÍNIMA
+                // ==========================================
+
+                const diferencaMin =
+                    document.getElementById(
+                        "previsao-diferenca-min"
+                    );
+
+
+                if (diferencaMin) {
+
+                    const valor =
+                        formatarNumero(
+                            diferenca.minima
+                        );
+
+
+                    diferencaMin.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // DIFERENÇA MÁXIMA
+                // ==========================================
+
+                const diferencaMax =
+                    document.getElementById(
+                        "previsao-diferenca-max"
+                    );
+
+
+                if (diferencaMax) {
+
+                    const valor =
+                        formatarNumero(
+                            diferenca.maxima
+                        );
+
+
+                    diferencaMax.textContent =
+                        valor === "--"
+                            ? "-- °C"
+                            : `${valor} °C`;
+
+                }
+
+
+                // ==========================================
+                // LOG PARA DEBUG
+                // ==========================================
+
+                console.log(
+                    "Previsão:",
+                    previsao
                 );
 
-        }
 
-
-        // ==========================================
-        // MÍNIMA PREVISTA
-        // ==========================================
-
-        const prevMin =
-            document.getElementById(
-                "prev_min"
-            );
-
-
-        if (prevMin) {
-
-            const valor =
-                formatarNumero(
-                    previsao.temperatura_minima
+                console.log(
+                    "Valores reais:",
+                    real
                 );
 
 
-            prevMin.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
-
-        }
-
-
-        // ==========================================
-        // MÁXIMA PREVISTA
-        // ==========================================
-
-        const prevMax =
-            document.getElementById(
-                "prev_max"
-            );
-
-
-        if (prevMax) {
-
-            const valor =
-                formatarNumero(
-                    previsao.temperatura_maxima
+                console.log(
+                    "Diferenças:",
+                    diferenca
                 );
 
 
-            prevMax.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
+            } catch (erro) {
 
-        }
-
-
-        // ==========================================
-        // DATA DA PREVISÃO
-        // ==========================================
-
-        const dataPrevisao =
-            document.getElementById(
-                "data-previsao"
-            );
-
-
-        if (dataPrevisao) {
-
-            dataPrevisao.textContent =
-                dados.data_prevista ||
-                "--";
-
-        }
-
-
-        // ==========================================
-        // PREVISÃO NA TELA DE PREVISÕES
-        // ==========================================
-
-        const previsaoTelaMedia =
-            document.getElementById(
-                "previsao-tela-media"
-            );
-
-
-        if (previsaoTelaMedia) {
-
-            previsaoTelaMedia.textContent =
-                formatarNumero(
-                    previsao.temperatura_media
+                console.error(
+                    "Erro ao carregar previsão:",
+                    erro
                 );
 
-        }
-
-
-        const previsaoTelaMin =
-            document.getElementById(
-                "previsao-tela-min"
-            );
-
-
-        if (previsaoTelaMin) {
-
-            const valor =
-                formatarNumero(
-                    previsao.temperatura_minima
-                );
-
-
-            previsaoTelaMin.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
+            }
 
         }
-
-
-        const previsaoTelaMax =
-            document.getElementById(
-                "previsao-tela-max"
-            );
-
-
-        if (previsaoTelaMax) {
-
-            const valor =
-                formatarNumero(
-                    previsao.temperatura_maxima
-                );
-
-
-            previsaoTelaMax.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
-
-        }
-
-
-        // ==========================================
-        // DIFERENÇA MÉDIA
-        // ==========================================
-
-        const diferencaMedia =
-            document.getElementById(
-                "previsao-diferenca-media"
-            );
-
-
-        if (diferencaMedia) {
-
-            const valor =
-                formatarNumero(
-                    diferenca.media
-                );
-
-
-            diferencaMedia.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
-
-        }
-
-
-        // ==========================================
-        // DIFERENÇA MÍNIMA
-        // ==========================================
-
-        const diferencaMin =
-            document.getElementById(
-                "previsao-diferenca-min"
-            );
-
-
-        if (diferencaMin) {
-
-            const valor =
-                formatarNumero(
-                    diferenca.minima
-                );
-
-
-            diferencaMin.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
-
-        }
-
-
-        // ==========================================
-        // DIFERENÇA MÁXIMA
-        // ==========================================
-
-        const diferencaMax =
-            document.getElementById(
-                "previsao-diferenca-max"
-            );
-
-
-        if (diferencaMax) {
-
-            const valor =
-                formatarNumero(
-                    diferenca.maxima
-                );
-
-
-            diferencaMax.textContent =
-                valor === "--"
-                    ? "-- °C"
-                    : `${valor} °C`;
-
-        }
-
-
-        // ==========================================
-        // LOG PARA DEBUG
-        // ==========================================
-
-        console.log(
-            "Previsão:",
-            previsao
-        );
-
-
-        console.log(
-            "Valores reais:",
-            real
-        );
-
-
-        console.log(
-            "Diferenças:",
-            diferenca
-        );
-
-    }
-
-    catch (erro) {
-
-        console.error(
-            "Erro ao carregar previsão:",
-            erro
-        );
-
-    }
-
-}
-
 
 // ==========================================
 // HISTÓRICO METEOROLÓGICO
@@ -1523,41 +1527,53 @@ async function carregarHistorico() {
     // CABEÇALHO DA TABELA
     // ==========================================
 
-    if (cabecalho) {
+// ==========================================
+// CABEÇALHO DA TABELA
+// ==========================================
 
-        cabecalho.innerHTML = `
-            <th rowspan="2" class="col-data">
-                Data
-            </th>
+if (cabecalho) {
 
-            <th colspan="3" class="grupo-coleta">
-                <span class="grupo-ponto"></span>
-                Coleta
-            </th>
+    cabecalho.innerHTML = `
+        <th rowspan="2" class="col-data">
+            Data
+        </th>
 
-            <th colspan="3" class="grupo-previsao">
-                <span class="grupo-ponto"></span>
-                Previsão
-            </th>
+        <th colspan="3" class="grupo-coleta">
+            <span class="grupo-ponto"></span>
+            Coleta
+        </th>
+
+        <th colspan="3" class="grupo-previsao">
+            <span class="grupo-ponto"></span>
+            Previsão
+        </th>
+
+        <th colspan="3" class="grupo-diferenca">
+            <span class="grupo-ponto"></span>
+            Diferença
+        </th>
+    `;
+
+    const segundaLinha =
+        tabela.querySelector("thead tr:nth-child(2)");
+
+    if (segundaLinha) {
+
+        segundaLinha.innerHTML = `
+            <th>Mínima</th>
+            <th>Média</th>
+            <th>Máxima</th>
+
+            <th>Mínima</th>
+            <th>Média</th>
+            <th>Máxima</th>
+
+            <th>Mínima</th>
+            <th>Média</th>
+            <th>Máxima</th>
         `;
-
-        const segundaLinha =
-            tabela.querySelector("thead tr:nth-child(2)");
-
-        if (segundaLinha) {
-
-            segundaLinha.innerHTML = `
-                <th>Mínima</th>
-                <th>Média</th>
-                <th>Máxima</th>
-
-                <th>Mínima</th>
-                <th>Média</th>
-                <th>Máxima</th>
-            `;
-        }
     }
-
+}
     // ==========================================
     // MENSAGEM DE CARREGAMENTO
     // ==========================================
@@ -1885,7 +1901,71 @@ async function carregarHistorico() {
                 formatarTemperatura(
                     registro.previsao.maxima
                 );
+// ==========================================
+// DIFERENÇAS
+// ==========================================
 
+// DIFERENÇA - MÍNIMA
+const diferencaMin = document.createElement("td");
+
+diferencaMin.className =
+    "historico-valor historico-diferenca";
+
+const valorColetaMin =
+    Number(registro.coleta.minima);
+
+const valorPrevisaoMin =
+    Number(registro.previsao.minima);
+
+diferencaMin.textContent =
+    Number.isFinite(valorColetaMin) &&
+    Number.isFinite(valorPrevisaoMin)
+        ? `${Math.abs(
+            valorColetaMin - valorPrevisaoMin
+        ).toFixed(1).replace(".", ",")} °C`
+        : "—";
+
+
+// DIFERENÇA - MÉDIA
+const diferencaMedia = document.createElement("td");
+
+diferencaMedia.className =
+    "historico-valor historico-diferenca";
+
+const valorColetaMedia =
+    Number(registro.coleta.media);
+
+const valorPrevisaoMedia =
+    Number(registro.previsao.media);
+
+diferencaMedia.textContent =
+    Number.isFinite(valorColetaMedia) &&
+    Number.isFinite(valorPrevisaoMedia)
+        ? `${Math.abs(
+            valorColetaMedia - valorPrevisaoMedia
+        ).toFixed(1).replace(".", ",")} °C`
+        : "—";
+
+
+// DIFERENÇA - MÁXIMA
+const diferencaMax = document.createElement("td");
+
+diferencaMax.className =
+    "historico-valor historico-diferenca";
+
+const valorColetaMax =
+    Number(registro.coleta.maxima);
+
+const valorPrevisaoMax =
+    Number(registro.previsao.maxima);
+
+diferencaMax.textContent =
+    Number.isFinite(valorColetaMax) &&
+    Number.isFinite(valorPrevisaoMax)
+        ? `${Math.abs(
+            valorColetaMax - valorPrevisaoMax
+        ).toFixed(1).replace(".", ",")} °C`
+        : "—";
             // ==========================================
             // ADICIONAR CÉLULAS
             // ==========================================
@@ -1899,6 +1979,10 @@ async function carregarHistorico() {
             linha.appendChild(previsaoMin);
             linha.appendChild(previsaoMedia);
             linha.appendChild(previsaoMax);
+
+            linha.appendChild(diferencaMin);
+            linha.appendChild(diferencaMedia);
+            linha.appendChild(diferencaMax);
 
             historicoTabela.appendChild(linha);
 
@@ -1914,7 +1998,7 @@ async function carregarHistorico() {
 
         historicoTabela.innerHTML = `
             <tr>
-                <td colspan="7" class="historico-sem-dados">
+                <td colspan="10" class="historico-sem-dados">
                     Erro ao carregar o histórico.
                 </td>
             </tr>
@@ -2696,69 +2780,264 @@ async function iniciar() {
     // ==========================================
 
 }
-// ==========================================
-// CLIMATEMPO
-// ==========================================
 
-async function carregarClimatempo() {
+        // ==========================================
+        // CARREGAR CLIMATEMPO
+        // ==========================================
 
-    try {
+        async function carregarClimatempo() {
 
-        const resposta = await fetch("/api/climatempo");
+            try {
 
-        const dados = await resposta.json();
+                // BUSCAR DADOS DO CLIMATEMPO
+                const respostaClimatempo =
+                    await fetch("/api/climatempo");
 
-        console.log("CLIMATEMPO:", dados);
+                if (!respostaClimatempo.ok) {
 
-        if (!dados.sucesso) {
-            throw new Error(
-                dados.erro || "Erro na API Climatempo"
-            );
+                    throw new Error(
+                        "Não foi possível carregar os dados do Climatempo."
+                    );
+
+                }
+
+                const dadosClimatempo =
+                    await respostaClimatempo.json();
+
+
+                // ==========================================
+                // VALORES DO CLIMATEMPO
+                // ==========================================
+
+                const minimaClimatempo =
+                    Number(dadosClimatempo.minima);
+
+                const maximaClimatempo =
+                    Number(dadosClimatempo.maxima);
+
+                const mediaClimatempo =
+                    (minimaClimatempo + maximaClimatempo) / 2;
+
+
+                // ==========================================
+                // MOSTRAR MÉDIA DO CLIMATEMPO
+                // ==========================================
+
+                const climatempoMedia =
+                    document.getElementById(
+                        "climatempo-media"
+                    );
+
+                if (climatempoMedia) {
+
+                    climatempoMedia.textContent =
+                        Number.isFinite(mediaClimatempo)
+                            ? mediaClimatempo
+                                .toFixed(1)
+                                .replace(".", ",")
+                            : "--";
+
+                }
+
+
+                // ==========================================
+                // MOSTRAR MÍNIMA DO CLIMATEMPO
+                // ==========================================
+
+                const climatempoMin =
+                    document.getElementById(
+                        "climatempo-min"
+                    );
+
+                if (climatempoMin) {
+
+                    climatempoMin.textContent =
+                        Number.isFinite(minimaClimatempo)
+                            ? `${minimaClimatempo
+                                .toFixed(1)
+                                .replace(".", ",")} °C`
+                            : "-- °C";
+
+                }
+
+
+                // ==========================================
+                // MOSTRAR MÁXIMA DO CLIMATEMPO
+                // ==========================================
+
+                const climatempoMax =
+                    document.getElementById(
+                        "climatempo-max"
+                    );
+
+                if (climatempoMax) {
+
+                    climatempoMax.textContent =
+                        Number.isFinite(maximaClimatempo)
+                            ? `${maximaClimatempo
+                                .toFixed(1)
+                                .replace(".", ",")} °C`
+                            : "-- °C";
+
+                }
+
+
+                // ==========================================
+                // BUSCAR PREVISÃO DO MODELO
+                // ==========================================
+
+                const respostaPrevisao =
+                    await fetch("/api/previsao");
+
+                if (!respostaPrevisao.ok) {
+
+                    throw new Error(
+                        "Não foi possível carregar a previsão do modelo."
+                    );
+
+                }
+
+                const dadosPrevisao =
+                    await respostaPrevisao.json();
+
+                const previsao =
+                    dadosPrevisao.previsao || {};
+
+
+                // ==========================================
+                // VALORES DO MODELO
+                // ==========================================
+
+                const modeloMedia =
+                    Number(
+                        previsao.temperatura_media
+                    );
+
+                const modeloMinima =
+                    Number(
+                        previsao.temperatura_minima
+                    );
+
+                const modeloMaxima =
+                    Number(
+                        previsao.temperatura_maxima
+                    );
+
+                // ==========================================
+                // DIFERENÇA MÉDIA
+                // ==========================================
+
+                const diferencaMedia =
+                    Number.isFinite(modeloMedia) &&
+                    Number.isFinite(mediaClimatempo)
+                        ? Math.abs(modeloMedia - mediaClimatempo)
+                        : null;
+
+                const comparacaoModelo =
+                    document.getElementById("comparacao-modelo");
+
+                if (comparacaoModelo) {
+                    comparacaoModelo.textContent =
+                        diferencaMedia !== null
+                            ? `${diferencaMedia
+                                .toFixed(1)
+                                .replace(".", ",")} °C`
+                            : "-";
+                }
+
+
+                // ==========================================
+                // DIFERENÇA MÍNIMA
+                // ==========================================
+
+                const diferencaMinima =
+                    Number.isFinite(modeloMinima) &&
+                    Number.isFinite(minimaClimatempo)
+                        ? Math.abs(modeloMinima - minimaClimatempo)
+                        : null;
+
+                const comparacaoDiferencaMin =
+                    document.getElementById(
+                        "comparacao-diferenca-min"
+                    );
+
+                if (comparacaoDiferencaMin) {
+                    comparacaoDiferencaMin.textContent =
+                        diferencaMinima !== null
+                            ? `${diferencaMinima
+                                .toFixed(1)
+                                .replace(".", ",")} °C`
+                            : "-";
+                }
+
+
+                // ==========================================
+                // DIFERENÇA MÁXIMA
+                // ==========================================
+
+                const diferencaMaxima =
+                    Number.isFinite(modeloMaxima) &&
+                    Number.isFinite(maximaClimatempo)
+                        ? Math.abs(modeloMaxima - maximaClimatempo)
+                        : null;
+
+                const comparacaoDiferencaMax =
+                    document.getElementById(
+                        "comparacao-diferenca-max"
+                    );
+
+                if (comparacaoDiferencaMax) {
+                    comparacaoDiferencaMax.textContent =
+                        diferencaMaxima !== null
+                            ? `${diferencaMaxima
+                                .toFixed(1)
+                                .replace(".", ",")} °C`
+                            : "-";
+                }
+
+
+
+                // ==========================================
+                // LOG
+                // ==========================================
+
+                console.log(
+                    "Climatempo:",
+                    dadosClimatempo
+                );
+
+                console.log(
+                    "Modelo:",
+                    previsao
+                );
+
+                console.log(
+                    "Diferença média:",
+                    diferencaMedia
+                );
+
+                console.log(
+                    "Diferença mínima:",
+                    diferencaMinima
+                );
+
+                console.log(
+                    "Diferença máxima:",
+                    diferencaMaxima
+                );
+
+
+            } catch (erro) {
+
+                console.error(
+                    "Erro ao carregar Climatempo:",
+                    erro
+                );
+
+            }
+
         }
 
-        const minima = Number(dados.minima);
-        const maxima = Number(dados.maxima);
-
-        // Calcula a média
-        const media = (minima + maxima) / 2;
-
-        // MÍNIMA
-        const elementoMin =
-            document.getElementById("climatempo-min");
-
-        if (elementoMin) {
-            elementoMin.textContent =
-                `${minima} °C`;
-        }
-
-        // MÁXIMA
-        const elementoMax =
-            document.getElementById("climatempo-max");
-
-        if (elementoMax) {
-            elementoMax.textContent =
-                `${maxima} °C`;
-        }
-
-        // MÉDIA
-        const elementoMedia =
-            document.getElementById("climatempo-media");
-
-        if (elementoMedia) {
-            elementoMedia.textContent =
-                media.toFixed(1);
-        }
-
-    } catch (erro) {
-
-        console.error(
-            "Erro ao carregar Climatempo:",
-            erro
-        );
-
-    }
-
-}
 // ==========================================
 // INICIAR SITE
 // ==========================================

@@ -1,9 +1,0 @@
-# Tokens e credenciais
-.env
-*.token
-token.txt
-github_token.txt
-
-# Arquivos locais
-Thumbs.db
-Desktop.ini
