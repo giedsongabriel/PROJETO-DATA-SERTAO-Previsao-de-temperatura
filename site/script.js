@@ -36,10 +36,14 @@ function mostrarTela(telaId) {
 
         const tela = document.getElementById(id);
 
-        if (!tela) return;
+        if (!tela) {
+            return;
+        }
 
-        tela.style.display = id === telaId ? "" : "none";
-
+        tela.style.display =
+            id === telaId
+                ? ""
+                : "none";
     });
 
     Object.keys(mapaMenus).forEach(function(menuId) {
@@ -49,21 +53,22 @@ function mostrarTela(telaId) {
         if (menu) {
             menu.classList.remove("active");
         }
-
     });
 
-    const menuAtivo = Object.keys(mapaMenus).find(function(menuId) {
-        return mapaMenus[menuId] === telaId;
-    });
+    const menuAtivo =
+        Object.keys(mapaMenus).find(function(menuId) {
+
+            return mapaMenus[menuId] === telaId;
+        });
 
     if (menuAtivo) {
 
-        const menu = document.getElementById(menuAtivo);
+        const menu =
+            document.getElementById(menuAtivo);
 
         if (menu) {
             menu.classList.add("active");
         }
-
     }
 
     if (telaId === "tela-historico") {
@@ -86,21 +91,27 @@ function mostrarTela(telaId) {
 
 function configurarNavegacao() {
 
-    Object.entries(mapaMenus).forEach(function([menuId, telaId]) {
+    Object.entries(mapaMenus).forEach(
+        function([menuId, telaId]) {
 
-        const menu = document.getElementById(menuId);
+            const menu =
+                document.getElementById(menuId);
 
-        if (!menu) return;
+            if (!menu) {
+                return;
+            }
 
-        menu.addEventListener("click", function(event) {
+            menu.addEventListener(
+                "click",
+                function(event) {
 
-            event.preventDefault();
-            mostrarTela(telaId);
+                    event.preventDefault();
 
-        });
-
-    });
-
+                    mostrarTela(telaId);
+                }
+            );
+        }
+    );
 }
 
 // ==========================================
@@ -111,61 +122,93 @@ async function carregarDados() {
 
     try {
 
-        const resposta = await fetch("/api/dados");
+        const resposta =
+            await fetch("/api/dados");
 
         if (!resposta.ok) {
-            throw new Error("Erro ao obter dados.");
+
+            throw new Error(
+                "Erro ao obter dados."
+            );
         }
 
-        const dados = await resposta.json();
+        const dados =
+            await resposta.json();
 
         const ultimaAtualizacao =
-            document.getElementById("ultima-atualizacao");
+            document.getElementById(
+                "ultima-atualizacao"
+            );
 
         if (ultimaAtualizacao) {
+
             ultimaAtualizacao.textContent =
                 dados.ultima_atualizacao || "--";
         }
 
         const temperatura =
-            document.getElementById("temperatura");
+            document.getElementById(
+                "temperatura"
+            );
 
         if (temperatura) {
+
             temperatura.textContent =
-                formatarNumero(dados.temperatura);
+                formatarNumero(
+                    dados.temperatura
+                );
         }
 
         const umidade =
-            document.getElementById("umidade");
+            document.getElementById(
+                "umidade"
+            );
 
         if (umidade) {
+
             umidade.textContent =
-                formatarNumero(dados.umidade);
+                formatarNumero(
+                    dados.umidade
+                );
         }
 
         const pressao =
-            document.getElementById("pressao");
+            document.getElementById(
+                "pressao"
+            );
 
         if (pressao) {
+
             pressao.textContent =
-                formatarNumero(dados.pressao);
+                formatarNumero(
+                    dados.pressao
+                );
         }
 
         const vento =
-            document.getElementById("vento");
+            document.getElementById(
+                "vento"
+            );
 
         if (vento) {
+
             vento.textContent =
-                formatarNumero(dados.vento);
+                formatarNumero(
+                    dados.vento
+                );
         }
 
         const pontoOrvalho =
-            document.getElementById("pontoOrvalho");
+            document.getElementById(
+                "pontoOrvalho"
+            );
 
         if (pontoOrvalho) {
 
             const valor =
-                formatarNumero(dados.ponto_orvalho);
+                formatarNumero(
+                    dados.ponto_orvalho
+                );
 
             pontoOrvalho.textContent =
                 valor === "--"
@@ -174,12 +217,16 @@ async function carregarDados() {
         }
 
         const direcaoVento =
-            document.getElementById("direcaoVento");
+            document.getElementById(
+                "direcaoVento"
+            );
 
         if (direcaoVento) {
 
             const valor =
-                formatarDirecao(dados.direcao_vento);
+                formatarDirecao(
+                    dados.direcao_vento
+                );
 
             direcaoVento.textContent =
                 valor === "--"
@@ -188,12 +235,16 @@ async function carregarDados() {
         }
 
         const velocidadeVento =
-            document.getElementById("velocidadeVento");
+            document.getElementById(
+                "velocidadeVento"
+            );
 
         if (velocidadeVento) {
 
             const valor =
-                formatarNumero(dados.vento);
+                formatarNumero(
+                    dados.vento
+                );
 
             velocidadeVento.textContent =
                 valor === "--"
@@ -202,12 +253,16 @@ async function carregarDados() {
         }
 
         const rajadaVento =
-            document.getElementById("rajadaVento");
+            document.getElementById(
+                "rajadaVento"
+            );
 
         if (rajadaVento) {
 
             const valor =
-                formatarNumero(dados.rajada_vento);
+                formatarNumero(
+                    dados.rajada_vento
+                );
 
             rajadaVento.textContent =
                 valor === "--"
@@ -216,12 +271,16 @@ async function carregarDados() {
         }
 
         const estacaoTemperatura =
-            document.getElementById("estacao-temperatura");
+            document.getElementById(
+                "estacao-temperatura"
+            );
 
         if (estacaoTemperatura) {
 
             const valor =
-                formatarNumero(dados.temperatura);
+                formatarNumero(
+                    dados.temperatura
+                );
 
             estacaoTemperatura.textContent =
                 valor === "--"
@@ -230,12 +289,16 @@ async function carregarDados() {
         }
 
         const estacaoUmidade =
-            document.getElementById("estacao-umidade");
+            document.getElementById(
+                "estacao-umidade"
+            );
 
         if (estacaoUmidade) {
 
             const valor =
-                formatarNumero(dados.umidade);
+                formatarNumero(
+                    dados.umidade
+                );
 
             estacaoUmidade.textContent =
                 valor === "--"
@@ -244,12 +307,16 @@ async function carregarDados() {
         }
 
         const estacaoPressao =
-            document.getElementById("estacao-pressao");
+            document.getElementById(
+                "estacao-pressao"
+            );
 
         if (estacaoPressao) {
 
             const valor =
-                formatarNumero(dados.pressao);
+                formatarNumero(
+                    dados.pressao
+                );
 
             estacaoPressao.textContent =
                 valor === "--"
@@ -258,12 +325,16 @@ async function carregarDados() {
         }
 
         const estacaoVento =
-            document.getElementById("estacao-vento");
+            document.getElementById(
+                "estacao-vento"
+            );
 
         if (estacaoVento) {
 
             const valor =
-                formatarNumero(dados.vento);
+                formatarNumero(
+                    dados.vento
+                );
 
             estacaoVento.textContent =
                 valor === "--"
@@ -273,10 +344,11 @@ async function carregarDados() {
 
     } catch (erro) {
 
-        console.error("Erro ao carregar dados:", erro);
-
+        console.error(
+            "Erro ao carregar dados:",
+            erro
+        );
     }
-
 }
 
 // ==========================================
@@ -286,10 +358,12 @@ async function carregarDados() {
 function obterUnidade(metrica) {
 
     const unidades = {
+
         temperatura: "°C",
         umidade: "%",
         pressao: "hPa",
         vento: "m/s"
+
     };
 
     return unidades[metrica] || "";
@@ -301,7 +375,9 @@ function obterUnidade(metrica) {
 
 let grafico = null;
 
-async function carregarGrafico(metrica = "temperatura") {
+async function carregarGrafico(
+    metrica = "temperatura"
+) {
 
     try {
 
@@ -311,139 +387,185 @@ async function carregarGrafico(metrica = "temperatura") {
             );
 
         if (!resposta.ok) {
+
             throw new Error(
                 "Erro ao obter dados do gráfico."
             );
         }
 
-        const dados = await resposta.json();
+        const dados =
+            await resposta.json();
 
         const canvas =
-            document.getElementById("graficoMeteorologico");
+            document.getElementById(
+                "graficoMeteorologico"
+            );
 
-        if (!canvas) return;
+        if (!canvas) {
+            return;
+        }
 
         if (grafico) {
+
             grafico.destroy();
+
             grafico = null;
         }
 
-        const unidade = obterUnidade(metrica);
+        const unidade =
+            obterUnidade(metrica);
 
-        grafico = new Chart(canvas, {
+        grafico =
+            new Chart(canvas, {
 
-            type: "line",
+                type: "line",
 
-            data: {
-                labels: dados.labels,
+                data: {
 
-                datasets: [{
-                    data: dados.valores,
-                    borderWidth: 2.5,
-                    pointRadius: 3,
-                    pointHoverRadius: 5,
-                    tension: 0.35,
-                    fill: true,
-                    backgroundColor: "rgba(38, 116, 74, 0.08)",
-                    borderColor: "#26744a",
-                    pointBackgroundColor: "#26744a",
-                    pointBorderColor: "#ffffff"
-                }]
-            },
+                    labels: dados.labels,
 
-            options: {
+                    datasets: [
 
-                responsive: true,
-                maintainAspectRatio: false,
+                        {
 
-                interaction: {
-                    intersect: false,
-                    mode: "index"
-                },
+                            data: dados.valores,
 
-                plugins: {
+                            borderWidth: 2.5,
 
-                    legend: {
-                        display: false
-                    },
+                            pointRadius: 3,
 
-                    tooltip: {
+                            pointHoverRadius: 5,
 
-                        backgroundColor: "#17202a",
-                        titleColor: "#ffffff",
-                        bodyColor: "#ffffff",
-                        padding: 10,
-                        displayColors: false,
+                            tension: 0.35,
 
-                        callbacks: {
+                            fill: true,
 
-                            label: function(context) {
+                            backgroundColor:
+                                "rgba(38, 116, 74, 0.08)",
 
-                                return (
-                                    formatarNumero(context.raw)
-                                    + " "
-                                    + unidade
-                                );
+                            borderColor:
+                                "#26744a",
 
-                            }
+                            pointBackgroundColor:
+                                "#26744a",
+
+                            pointBorderColor:
+                                "#ffffff"
 
                         }
 
-                    }
-
+                    ]
                 },
 
-                scales: {
+                options: {
 
-                    x: {
+                    responsive: true,
 
-                        grid: {
+                    maintainAspectRatio: false,
+
+                    interaction: {
+
+                        intersect: false,
+
+                        mode: "index"
+                    },
+
+                    plugins: {
+
+                        legend: {
+
                             display: false
                         },
 
-                        ticks: {
-                            color: "#929ca7",
-                            font: {
-                                size: 11
-                            },
-                            maxTicksLimit: 8
-                        }
+                        tooltip: {
 
+                            backgroundColor:
+                                "#17202a",
+
+                            titleColor:
+                                "#ffffff",
+
+                            bodyColor:
+                                "#ffffff",
+
+                            padding: 10,
+
+                            displayColors: false,
+
+                            callbacks: {
+
+                                label:
+                                    function(context) {
+
+                                        return (
+                                            formatarNumero(
+                                                context.raw
+                                            )
+                                            + " "
+                                            + unidade
+                                        );
+                                    }
+                            }
+                        }
                     },
 
-                    y: {
+                    scales: {
 
-                        grid: {
-                            color: "#edf0f2"
-                        },
+                        x: {
 
-                        ticks: {
+                            grid: {
 
-                            color: "#929ca7",
-
-                            font: {
-                                size: 11
+                                display: false
                             },
 
-                            callback: function(value) {
+                            ticks: {
 
-                                return (
-                                    formatarNumero(value)
-                                    + " "
-                                    + unidade
-                                );
+                                color:
+                                    "#929ca7",
 
+                                font: {
+
+                                    size: 11
+                                },
+
+                                maxTicksLimit: 8
                             }
+                        },
 
+                        y: {
+
+                            grid: {
+
+                                color:
+                                    "#edf0f2"
+                            },
+
+                            ticks: {
+
+                                color:
+                                    "#929ca7",
+
+                                font: {
+
+                                    size: 11
+                                },
+
+                                callback:
+                                    function(value) {
+
+                                        return (
+                                            formatarNumero(
+                                                value
+                                            )
+                                            + " "
+                                            + unidade
+                                        );
+                                    }
+                            }
                         }
-
                     }
-
                 }
-
-            }
-
-        });
+            });
 
     } catch (erro) {
 
@@ -451,9 +573,7 @@ async function carregarGrafico(metrica = "temperatura") {
             "Erro ao carregar gráfico:",
             erro
         );
-
     }
-
 }
 
 // ==========================================
@@ -469,13 +589,13 @@ function formatarNumero(valor) {
         valor === "N/A" ||
         !Number.isFinite(Number(valor))
     ) {
+
         return "--";
     }
 
     return Number(valor)
         .toFixed(1)
         .replace(".", ",");
-
 }
 
 // ==========================================
@@ -491,11 +611,13 @@ function formatarDirecao(valor) {
         valor === "N/A" ||
         !Number.isFinite(Number(valor))
     ) {
+
         return "--";
     }
 
-    return Math.round(Number(valor));
-
+    return Math.round(
+        Number(valor)
+    );
 }
 
 // ==========================================
@@ -510,24 +632,232 @@ function valorNumericoValido(valor) {
         valor === "" ||
         valor === "N/A"
     ) {
+
         return false;
     }
 
-    return Number.isFinite(Number(valor));
+    return Number.isFinite(
+        Number(valor)
+    );
+}
 
+// ==========================================
+// CONVERTER DATA/HORA PARA TIMESTAMP
+// ==========================================
+// Aceita:
+// YYYY-MM-DD
+// YYYY-MM-DD HH:mm:ss
+// YYYY-MM-DDTHH:mm:ss
+// DD/MM/YYYY HH:mm:ss
+// DD/MM/YYYY HH:mm
+// ==========================================
+
+function obterTimestamp(data) {
+
+    if (
+        data === null ||
+        data === undefined ||
+        data === ""
+    ) {
+
+        return NaN;
+    }
+
+    if (
+        data instanceof Date
+    ) {
+
+        return data.getTime();
+    }
+
+    const texto =
+        String(data).trim();
+
+    // DD/MM/YYYY HH:mm:ss
+    let correspondencia =
+        texto.match(
+            /^(\d{2})\/(\d{2})\/(\d{4})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/
+        );
+
+    if (correspondencia) {
+
+        const dia =
+            Number(correspondencia[1]);
+
+        const mes =
+            Number(correspondencia[2]) - 1;
+
+        const ano =
+            Number(correspondencia[3]);
+
+        const hora =
+            Number(correspondencia[4] || 0);
+
+        const minuto =
+            Number(correspondencia[5] || 0);
+
+        const segundo =
+            Number(correspondencia[6] || 0);
+
+        return new Date(
+            ano,
+            mes,
+            dia,
+            hora,
+            minuto,
+            segundo
+        ).getTime();
+    }
+
+    // YYYY-MM-DD HH:mm:ss
+    correspondencia =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?$/
+        );
+
+    if (correspondencia) {
+
+        const ano =
+            Number(correspondencia[1]);
+
+        const mes =
+            Number(correspondencia[2]) - 1;
+
+        const dia =
+            Number(correspondencia[3]);
+
+        const hora =
+            Number(correspondencia[4] || 0);
+
+        const minuto =
+            Number(correspondencia[5] || 0);
+
+        const segundo =
+            Number(correspondencia[6] || 0);
+
+        return new Date(
+            ano,
+            mes,
+            dia,
+            hora,
+            minuto,
+            segundo
+        ).getTime();
+    }
+
+    const timestamp =
+        new Date(texto).getTime();
+
+    return Number.isFinite(timestamp)
+        ? timestamp
+        : NaN;
+}
+
+// ==========================================
+// PEGAR ÚLTIMA PREVISÃO DE CADA DIA
+// ==========================================
+// Para cada Data_Prevista, mantém somente
+// a previsão cuja Data_Execucao é mais recente.
+// ==========================================
+
+function selecionarUltimaPrevisaoPorDia(
+    registros
+) {
+
+    if (
+        !Array.isArray(registros) ||
+        registros.length === 0
+    ) {
+
+        return [];
+    }
+
+    const ultimasPrevisoes = {};
+
+    registros.forEach(function(item) {
+
+        const dataPrevista =
+            item.Data_Prevista ??
+            item.data_prevista;
+
+        const dataExecucao =
+            item.Data_Execucao ??
+            item.data_execucao;
+
+        if (!dataPrevista) {
+            return;
+        }
+
+        const chaveData =
+            String(dataPrevista)
+                .substring(0, 10);
+
+        if (
+            !ultimasPrevisoes[chaveData]
+        ) {
+
+            ultimasPrevisoes[chaveData] =
+                item;
+
+            return;
+        }
+
+        const execucaoAtual =
+            obterTimestamp(
+                dataExecucao
+            );
+
+        const execucaoAnterior =
+            obterTimestamp(
+                ultimasPrevisoes[chaveData]
+                    .Data_Execucao ??
+                ultimasPrevisoes[chaveData]
+                    .data_execucao
+            );
+
+        // Se a execução atual for mais recente,
+        // substitui a anterior.
+        if (
+            Number.isFinite(
+                execucaoAtual
+            ) &&
+            (
+                !Number.isFinite(
+                    execucaoAnterior
+                ) ||
+                execucaoAtual >
+                execucaoAnterior
+            )
+        ) {
+
+            ultimasPrevisoes[chaveData] =
+                item;
+        }
+    });
+
+    return Object.values(
+        ultimasPrevisoes
+    );
 }
 
 // ==========================================
 // DIFERENÇA DA PÁGINA INICIAL
 // ==========================================
 
-function atualizarDiferencasPaginaInicial(modelo, climatempo) {
+function atualizarDiferencasPaginaInicial(
+    modelo,
+    climatempo
+) {
 
-    // As diferenças só podem existir quando:
-    // 1. o modelo tiver retornado valores válidos;
-    // 2. o Climatempo tiver retornado valores válidos.
-    if (!modelo || !climatempo) {
-        console.log("Diferença não calculada: dados ausentes.");
+    if (
+        !modelo ||
+        !climatempo
+    ) {
+
+        console.log(
+            "Diferença não calculada: dados ausentes."
+        );
+
         return;
     }
 
@@ -539,52 +869,110 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
             valor === "" ||
             valor === "N/A"
         ) {
+
             return NaN;
         }
 
-        // Aceita tanto 27.5 quanto "27,5"
-        const numero = Number(
-            String(valor).replace(",", ".")
-        );
+        const numero =
+            Number(
+                String(valor)
+                    .replace(",", ".")
+            );
 
         return Number.isFinite(numero)
             ? numero
             : NaN;
     }
 
-    const modeloMedia = converterNumero(modelo.media);
-    const modeloMinima = converterNumero(modelo.minima);
-    const modeloMaxima = converterNumero(modelo.maxima);
+    const modeloMedia =
+        converterNumero(
+            modelo.media
+        );
 
-    const climatempoMedia = converterNumero(climatempo.media);
-    const climatempoMinima = converterNumero(climatempo.minima);
-    const climatempoMaxima = converterNumero(climatempo.maxima);
+    const modeloMinima =
+        converterNumero(
+            modelo.minima
+        );
 
-    console.log("===== COMPARAÇÃO MODELO x CLIMATEMPO =====");
-    console.log("Modelo média:", modeloMedia);
-    console.log("Climatempo média:", climatempoMedia);
-    console.log("Modelo mínima:", modeloMinima);
-    console.log("Climatempo mínima:", climatempoMinima);
-    console.log("Modelo máxima:", modeloMaxima);
-    console.log("Climatempo máxima:", climatempoMaxima);
+    const modeloMaxima =
+        converterNumero(
+            modelo.maxima
+        );
+
+    const climatempoMedia =
+        converterNumero(
+            climatempo.media
+        );
+
+    const climatempoMinima =
+        converterNumero(
+            climatempo.minima
+        );
+
+    const climatempoMaxima =
+        converterNumero(
+            climatempo.maxima
+        );
+
+    console.log(
+        "===== COMPARAÇÃO MODELO x CLIMATEMPO ====="
+    );
+
+    console.log(
+        "Modelo média:",
+        modeloMedia
+    );
+
+    console.log(
+        "Climatempo média:",
+        climatempoMedia
+    );
+
+    console.log(
+        "Modelo mínima:",
+        modeloMinima
+    );
+
+    console.log(
+        "Climatempo mínima:",
+        climatempoMinima
+    );
+
+    console.log(
+        "Modelo máxima:",
+        modeloMaxima
+    );
+
+    console.log(
+        "Climatempo máxima:",
+        climatempoMaxima
+    );
 
     // ==========================================
     // MÉDIA
-    // ID REAL DO HTML: comparacao-modelo
     // ==========================================
 
     const elementoMedia =
-        document.getElementById("comparacao-modelo");
+        document.getElementById(
+            "comparacao-modelo"
+        );
 
     if (elementoMedia) {
 
         if (
-            Number.isFinite(modeloMedia) &&
-            Number.isFinite(climatempoMedia)
+            Number.isFinite(
+                modeloMedia
+            ) &&
+            Number.isFinite(
+                climatempoMedia
+            )
         ) {
 
             const diferencaMedia =
-                Math.abs(modeloMedia - climatempoMedia);
+                Math.abs(
+                    modeloMedia -
+                    climatempoMedia
+                );
 
             elementoMedia.textContent =
                 `${diferencaMedia
@@ -593,7 +981,8 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
 
         } else {
 
-            elementoMedia.textContent = "-";
+            elementoMedia.textContent =
+                "-";
         }
 
     } else {
@@ -605,7 +994,6 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
 
     // ==========================================
     // MÍNIMA
-    // ID REAL DO HTML: comparacao-diferenca-min
     // ==========================================
 
     const elementoMinima =
@@ -616,12 +1004,19 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
     if (elementoMinima) {
 
         if (
-            Number.isFinite(modeloMinima) &&
-            Number.isFinite(climatempoMinima)
+            Number.isFinite(
+                modeloMinima
+            ) &&
+            Number.isFinite(
+                climatempoMinima
+            )
         ) {
 
             const diferencaMinima =
-                Math.abs(modeloMinima - climatempoMinima);
+                Math.abs(
+                    modeloMinima -
+                    climatempoMinima
+                );
 
             elementoMinima.textContent =
                 `${diferencaMinima
@@ -630,7 +1025,8 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
 
         } else {
 
-            elementoMinima.textContent = "-";
+            elementoMinima.textContent =
+                "-";
         }
 
     } else {
@@ -642,7 +1038,6 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
 
     // ==========================================
     // MÁXIMA
-    // ID REAL DO HTML: comparacao-diferenca-max
     // ==========================================
 
     const elementoMaxima =
@@ -653,12 +1048,19 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
     if (elementoMaxima) {
 
         if (
-            Number.isFinite(modeloMaxima) &&
-            Number.isFinite(climatempoMaxima)
+            Number.isFinite(
+                modeloMaxima
+            ) &&
+            Number.isFinite(
+                climatempoMaxima
+            )
         ) {
 
             const diferencaMaxima =
-                Math.abs(modeloMaxima - climatempoMaxima);
+                Math.abs(
+                    modeloMaxima -
+                    climatempoMaxima
+                );
 
             elementoMaxima.textContent =
                 `${diferencaMaxima
@@ -667,7 +1069,8 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
 
         } else {
 
-            elementoMaxima.textContent = "-";
+            elementoMaxima.textContent =
+                "-";
         }
 
     } else {
@@ -677,7 +1080,9 @@ function atualizarDiferencasPaginaInicial(modelo, climatempo) {
         );
     }
 
-    console.log("Diferenças atualizadas na página inicial.");
+    console.log(
+        "Diferenças atualizadas na página inicial."
+    );
 }
 
 // ==========================================
@@ -689,14 +1094,15 @@ async function carregarPrevisao() {
     try {
 
         const resposta =
-            await fetch("/api/previsao");
+            await fetch(
+                "/api/previsao"
+            );
 
         if (!resposta.ok) {
 
             throw new Error(
                 "Não foi possível carregar a previsão."
             );
-
         }
 
         const dados =
@@ -706,9 +1112,12 @@ async function carregarPrevisao() {
             dados.previsao || {};
 
         const prevMed =
-            document.getElementById("prev_med");
+            document.getElementById(
+                "prev_med"
+            );
 
         if (prevMed) {
+
             prevMed.textContent =
                 formatarNumero(
                     previsao.temperatura_media
@@ -716,7 +1125,9 @@ async function carregarPrevisao() {
         }
 
         const prevMin =
-            document.getElementById("prev_min");
+            document.getElementById(
+                "prev_min"
+            );
 
         if (prevMin) {
 
@@ -729,11 +1140,12 @@ async function carregarPrevisao() {
                 valor === "--"
                     ? "-- °C"
                     : `${valor} °C`;
-
         }
 
         const prevMax =
-            document.getElementById("prev_max");
+            document.getElementById(
+                "prev_max"
+            );
 
         if (prevMax) {
 
@@ -746,21 +1158,26 @@ async function carregarPrevisao() {
                 valor === "--"
                     ? "-- °C"
                     : `${valor} °C`;
-
         }
 
         const dataPrevisao =
-            document.getElementById("data-previsao");
+            document.getElementById(
+                "data-previsao"
+            );
 
         if (dataPrevisao) {
+
             dataPrevisao.textContent =
                 dados.data_prevista || "--";
         }
 
         const previsaoTelaMedia =
-            document.getElementById("previsao-tela-media");
+            document.getElementById(
+                "previsao-tela-media"
+            );
 
         if (previsaoTelaMedia) {
+
             previsaoTelaMedia.textContent =
                 formatarNumero(
                     previsao.temperatura_media
@@ -768,7 +1185,9 @@ async function carregarPrevisao() {
         }
 
         const previsaoTelaMin =
-            document.getElementById("previsao-tela-min");
+            document.getElementById(
+                "previsao-tela-min"
+            );
 
         if (previsaoTelaMin) {
 
@@ -781,11 +1200,12 @@ async function carregarPrevisao() {
                 valor === "--"
                     ? "-- °C"
                     : `${valor} °C`;
-
         }
 
         const previsaoTelaMax =
-            document.getElementById("previsao-tela-max");
+            document.getElementById(
+                "previsao-tela-max"
+            );
 
         if (previsaoTelaMax) {
 
@@ -798,15 +1218,23 @@ async function carregarPrevisao() {
                 valor === "--"
                     ? "-- °C"
                     : `${valor} °C`;
-
         }
 
-        console.log("Previsão do modelo:", previsao);
+        console.log(
+            "Previsão do modelo:",
+            previsao
+        );
 
         return {
-            media: previsao.temperatura_media,
-            minima: previsao.temperatura_minima,
-            maxima: previsao.temperatura_maxima
+
+            media:
+                previsao.temperatura_media,
+
+            minima:
+                previsao.temperatura_minima,
+
+            maxima:
+                previsao.temperatura_maxima
         };
 
     } catch (erro) {
@@ -817,89 +1245,112 @@ async function carregarPrevisao() {
         );
 
         return null;
-
     }
-
 }
 
 // ==========================================
 // CARREGAR CLIMATEMPO
 // ==========================================
 
-async function carregarClimatempo(previsaoModelo = null) {
+async function carregarClimatempo(
+    previsaoModelo = null
+) {
 
     try {
 
         if (!previsaoModelo) {
-            previsaoModelo = await carregarPrevisao();
+
+            previsaoModelo =
+                await carregarPrevisao();
         }
 
         const respostaClimatempo =
-            await fetch("/api/climatempo");
+            await fetch(
+                "/api/climatempo"
+            );
 
         if (!respostaClimatempo.ok) {
 
             throw new Error(
                 "Não foi possível carregar os dados do Climatempo."
             );
-
         }
 
         const dadosClimatempo =
             await respostaClimatempo.json();
 
         const minimaClimatempo =
-            Number(dadosClimatempo.minima);
+            Number(
+                dadosClimatempo.minima
+            );
 
         const maximaClimatempo =
-            Number(dadosClimatempo.maxima);
+            Number(
+                dadosClimatempo.maxima
+            );
 
         const mediaClimatempo =
-            Number.isFinite(minimaClimatempo) &&
-            Number.isFinite(maximaClimatempo)
-                ? (minimaClimatempo + maximaClimatempo) / 2
+            Number.isFinite(
+                minimaClimatempo
+            ) &&
+            Number.isFinite(
+                maximaClimatempo
+            )
+                ? (
+                    minimaClimatempo +
+                    maximaClimatempo
+                ) / 2
                 : NaN;
 
         const climatempoMedia =
-            document.getElementById("climatempo-media");
+            document.getElementById(
+                "climatempo-media"
+            );
 
         if (climatempoMedia) {
 
             climatempoMedia.textContent =
-                Number.isFinite(mediaClimatempo)
+                Number.isFinite(
+                    mediaClimatempo
+                )
                     ? mediaClimatempo
                         .toFixed(1)
                         .replace(".", ",")
                     : "--";
-
         }
 
         const climatempoMin =
-            document.getElementById("climatempo-min");
+            document.getElementById(
+                "climatempo-min"
+            );
 
         if (climatempoMin) {
 
             climatempoMin.textContent =
-                Number.isFinite(minimaClimatempo)
+                Number.isFinite(
+                    minimaClimatempo
+                )
                     ? `${minimaClimatempo
                         .toFixed(1)
                         .replace(".", ",")} °C`
                     : "-- °C";
-
         }
 
         const climatempoMax =
-            document.getElementById("climatempo-max");
+            document.getElementById(
+                "climatempo-max"
+            );
 
         if (climatempoMax) {
 
             climatempoMax.textContent =
-                Number.isFinite(maximaClimatempo)
+                Number.isFinite(
+                    maximaClimatempo
+                )
                     ? `${maximaClimatempo
                         .toFixed(1)
                         .replace(".", ",")} °C`
                     : "-- °C";
-
         }
 
         // ==========================================
@@ -911,11 +1362,15 @@ async function carregarClimatempo(previsaoModelo = null) {
             previsaoModelo,
 
             {
-                media: mediaClimatempo,
-                minima: minimaClimatempo,
-                maxima: maximaClimatempo
-            }
+                media:
+                    mediaClimatempo,
 
+                minima:
+                    minimaClimatempo,
+
+                maxima:
+                    maximaClimatempo
+            }
         );
 
         console.log(
@@ -925,10 +1380,14 @@ async function carregarClimatempo(previsaoModelo = null) {
 
         return {
 
-            media: mediaClimatempo,
-            minima: minimaClimatempo,
-            maxima: maximaClimatempo
+            media:
+                mediaClimatempo,
 
+            minima:
+                minimaClimatempo,
+
+            maxima:
+                maximaClimatempo
         };
 
     } catch (erro) {
@@ -939,9 +1398,7 @@ async function carregarClimatempo(previsaoModelo = null) {
         );
 
         return null;
-
     }
-
 }
 
 // ==========================================
@@ -949,19 +1406,27 @@ async function carregarClimatempo(previsaoModelo = null) {
 // ==========================================
 
 const historicoFonte =
-    document.getElementById("historico-fonte");
+    document.getElementById(
+        "historico-fonte"
+    );
 
 const historicoPeriodo =
-    document.getElementById("historico-periodo");
+    document.getElementById(
+        "historico-periodo"
+    );
 
 const historicoTabela =
-    document.getElementById("historico-tabela-body");
+    document.getElementById(
+        "historico-tabela-body"
+    );
 
 // ==========================================
 // UNIDADES DO HISTÓRICO
 // ==========================================
 
-function obterUnidadeHistorico(metrica) {
+function obterUnidadeHistorico(
+    metrica
+) {
 
     const unidades = {
 
@@ -975,22 +1440,31 @@ function obterUnidadeHistorico(metrica) {
     };
 
     return unidades[metrica] || "";
-
 }
 
 // ==========================================
 // FORMATAÇÃO DA DATA
 // ==========================================
 
-function formatarDataHistorico(data) {
+function formatarDataHistorico(
+    data
+) {
 
-    if (!data) return "--";
+    if (!data) {
+        return "--";
+    }
 
-    const texto = String(data);
+    const texto =
+        String(data);
 
-    if (/^\d{4}-\d{2}-\d{2}$/.test(texto)) {
+    if (
+        /^\d{4}-\d{2}-\d{2}$/.test(
+            texto
+        )
+    ) {
 
-        const partes = texto.split("-");
+        const partes =
+            texto.split("-");
 
         return (
             partes[2] +
@@ -999,10 +1473,11 @@ function formatarDataHistorico(data) {
             "/" +
             partes[0]
         );
-
     }
 
-    if (texto.includes("T")) {
+    if (
+        texto.includes("T")
+    ) {
 
         const somenteData =
             texto.split("T")[0];
@@ -1019,12 +1494,12 @@ function formatarDataHistorico(data) {
                 "/" +
                 partes[0]
             );
-
         }
-
     }
 
-    if (texto.includes(" ")) {
+    if (
+        texto.includes(" ")
+    ) {
 
         const somenteData =
             texto.split(" ")[0];
@@ -1041,39 +1516,51 @@ function formatarDataHistorico(data) {
                 "/" +
                 partes[0]
             );
-
         }
-
     }
 
     return texto;
-
 }
 
 // ==========================================
 // FORMATAÇÃO DA DATA E HORA
 // ==========================================
 
-function formatarDataHoraHistorico(data) {
+function formatarDataHoraHistorico(
+    data
+) {
 
-    if (!data) return "--";
+    if (!data) {
+        return "--";
+    }
 
-    const texto = String(data);
+    const texto =
+        String(data);
 
-    if (/^\d{2}\/\d{2}\/\d{4} /.test(texto)) {
+    if (
+        /^\d{2}\/\d{2}\/\d{4} /.test(
+            texto
+        )
+    ) {
+
         return texto;
     }
 
-    if (texto.includes(" ")) {
+    if (
+        texto.includes(" ")
+    ) {
 
-        const partes = texto.split(" ");
+        const partes =
+            texto.split(" ");
 
         if (partes.length >= 2) {
 
             const partesData =
                 partes[0].split("-");
 
-            if (partesData.length === 3) {
+            if (
+                partesData.length === 3
+            ) {
 
                 return (
                     partesData[2] +
@@ -1084,19 +1571,23 @@ function formatarDataHoraHistorico(data) {
                     " " +
                     partes[1].substring(0, 5)
                 );
-
             }
-
         }
-
     }
 
-    if (texto.includes("T")) {
+    if (
+        texto.includes("T")
+    ) {
 
-        const partes = texto.split("T");
-        const partesData = partes[0].split("-");
+        const partes =
+            texto.split("T");
 
-        if (partesData.length === 3) {
+        const partesData =
+            partes[0].split("-");
+
+        if (
+            partesData.length === 3
+        ) {
 
             return (
                 partesData[2] +
@@ -1105,15 +1596,15 @@ function formatarDataHoraHistorico(data) {
                 "/" +
                 partesData[0] +
                 " " +
-                (partes[1] || "").substring(0, 5)
+                (partes[1] || "")
+                    .substring(0, 5)
             );
-
         }
-
     }
 
-    return formatarDataHistorico(texto);
-
+    return formatarDataHistorico(
+        texto
+    );
 }
 
 // ==========================================
@@ -1122,7 +1613,9 @@ function formatarDataHoraHistorico(data) {
 
 async function carregarHistorico() {
 
-    if (!historicoTabela) return;
+    if (!historicoTabela) {
+        return;
+    }
 
     const periodo =
         historicoPeriodo
@@ -1130,11 +1623,15 @@ async function carregarHistorico() {
             : "30";
 
     const tabela =
-        historicoTabela.closest("table");
+        historicoTabela.closest(
+            "table"
+        );
 
     const cabecalho =
         tabela
-            ? tabela.querySelector("thead tr")
+            ? tabela.querySelector(
+                "thead tr"
+            )
             : null;
 
     if (cabecalho) {
@@ -1180,9 +1677,7 @@ async function carregarHistorico() {
                 <th>Média</th>
                 <th>Máxima</th>
             `;
-
         }
-
     }
 
     historicoTabela.innerHTML = `
@@ -1205,7 +1700,6 @@ async function carregarHistorico() {
             throw new Error(
                 "Erro ao carregar histórico de temperaturas."
             );
-
         }
 
         const dadosColeta =
@@ -1215,9 +1709,13 @@ async function carregarHistorico() {
 
         if (
             dadosColeta &&
-            Array.isArray(dadosColeta.dados)
+            Array.isArray(
+                dadosColeta.dados
+            )
         ) {
-            registrosColeta = dadosColeta.dados;
+
+            registrosColeta =
+                dadosColeta.dados;
         }
 
         const respostaPrevisao =
@@ -1234,119 +1732,167 @@ async function carregarHistorico() {
 
             if (
                 dadosPrevisao &&
-                Array.isArray(dadosPrevisao.dados)
+                Array.isArray(
+                    dadosPrevisao.dados
+                )
             ) {
 
                 registrosPrevisao =
                     dadosPrevisao.dados;
 
-            } else if (Array.isArray(dadosPrevisao)) {
+            } else if (
+                Array.isArray(
+                    dadosPrevisao
+                )
+            ) {
 
                 registrosPrevisao =
                     dadosPrevisao;
-
             }
-
         }
+
+        // ==========================================
+        // MANTER SOMENTE A ÚLTIMA PREVISÃO DE CADA DIA
+        // ==========================================
+
+        registrosPrevisao =
+            selecionarUltimaPrevisaoPorDia(
+                registrosPrevisao
+            );
 
         const historico = {};
 
-        registrosColeta.forEach(function(item) {
+        registrosColeta.forEach(
+            function(item) {
 
-            const data = item.data;
+                const data =
+                    item.data;
 
-            if (!data) return;
+                if (!data) {
+                    return;
+                }
 
-            const partes = data.split("/");
+                const partes =
+                    data.split("/");
 
-            let chaveData = data;
+                let chaveData =
+                    data;
 
-            if (partes.length === 3) {
+                if (
+                    partes.length === 3
+                ) {
 
-                chaveData =
-                    `${partes[2]}-${partes[1]}-${partes[0]}`;
+                    chaveData =
+                        `${partes[2]}-${partes[1]}-${partes[0]}`;
+                }
 
+                if (!historico[chaveData]) {
+
+                    historico[chaveData] = {
+
+                        coleta: {
+
+                            minima: null,
+                            media: null,
+                            maxima: null
+                        },
+
+                        previsao: {
+
+                            minima: null,
+                            media: null,
+                            maxima: null
+                        }
+                    };
+                }
+
+                historico[chaveData]
+                    .coleta.minima =
+                    item.minima ?? null;
+
+                historico[chaveData]
+                    .coleta.media =
+                    item.media ?? null;
+
+                historico[chaveData]
+                    .coleta.maxima =
+                    item.maxima ?? null;
             }
+        );
 
-            if (!historico[chaveData]) {
+        registrosPrevisao.forEach(
+            function(item) {
 
-                historico[chaveData] = {
+                const data =
+                    item.Data_Prevista ??
+                    item.data_prevista;
 
-                    coleta: {
-                        minima: null,
-                        media: null,
-                        maxima: null
-                    },
+                if (!data) {
+                    return;
+                }
 
-                    previsao: {
-                        minima: null,
-                        media: null,
-                        maxima: null
-                    }
+                const chaveData =
+                    String(data)
+                        .substring(0, 10);
 
-                };
+                if (!historico[chaveData]) {
 
+                    historico[chaveData] = {
+
+                        coleta: {
+
+                            minima: null,
+                            media: null,
+                            maxima: null
+                        },
+
+                        previsao: {
+
+                            minima: null,
+                            media: null,
+                            maxima: null
+                        }
+                    };
+                }
+
+                // ==========================================
+                // SUPORTAR OS DOIS FORMATOS DA API
+                // ==========================================
+
+                historico[chaveData]
+                    .previsao.media =
+                    item.previsao?.media ??
+                    item.Temp_Media_Prevista_C ??
+                    item.temp_media_prevista_c ??
+                    null;
+
+                historico[chaveData]
+                    .previsao.minima =
+                    item.previsao?.minima ??
+                    item.Temp_Min_Prevista_C ??
+                    item.temp_min_prevista_c ??
+                    null;
+
+                historico[chaveData]
+                    .previsao.maxima =
+                    item.previsao?.maxima ??
+                    item.Temp_Max_Prevista_C ??
+                    item.temp_max_prevista_c ??
+                    null;
             }
-
-            historico[chaveData].coleta.minima =
-                item.minima ?? null;
-
-            historico[chaveData].coleta.media =
-                item.media ?? null;
-
-            historico[chaveData].coleta.maxima =
-                item.maxima ?? null;
-
-        });
-
-        registrosPrevisao.forEach(function(item) {
-
-            const data =
-                item.Data_Prevista ??
-                item.data_prevista;
-
-            if (!data) return;
-
-            const chaveData =
-                String(data).substring(0, 10);
-
-            if (!historico[chaveData]) {
-
-                historico[chaveData] = {
-
-                    coleta: {
-                        minima: null,
-                        media: null,
-                        maxima: null
-                    },
-
-                    previsao: {
-                        minima: null,
-                        media: null,
-                        maxima: null
-                    }
-
-                };
-
-            }
-
-            historico[chaveData].previsao.media =
-                item.previsao?.media ?? null;
-
-            historico[chaveData].previsao.minima =
-                item.previsao?.minima ?? null;
-
-            historico[chaveData].previsao.maxima =
-                item.previsao?.maxima ?? null;
-
-        });
+        );
 
         const datas =
-            Object.keys(historico);
+            Object.keys(
+                historico
+            );
 
-        historicoTabela.innerHTML = "";
+        historicoTabela.innerHTML =
+            "";
 
-        if (datas.length === 0) {
+        if (
+            datas.length === 0
+        ) {
 
             historicoTabela.innerHTML = `
                 <tr>
@@ -1357,18 +1903,28 @@ async function carregarHistorico() {
             `;
 
             return;
-
         }
 
-        datas.sort(function(a, b) {
+        datas.sort(
+            function(a, b) {
 
-            return new Date(b) - new Date(a);
+                return (
+                    new Date(b) -
+                    new Date(a)
+                );
+            }
+        );
 
-        });
+        function formatarTemperatura(
+            valor
+        ) {
 
-        function formatarTemperatura(valor) {
+            if (
+                !valorNumericoValido(
+                    valor
+                )
+            ) {
 
-            if (!valorNumericoValido(valor)) {
                 return "—";
             }
 
@@ -1377,205 +1933,309 @@ async function carregarHistorico() {
                     .toFixed(1)
                     .replace(".", ",")} °C`
             );
-
         }
 
-        datas.forEach(function(data) {
+        datas.forEach(
+            function(data) {
 
-            const registro =
-                historico[data];
+                const registro =
+                    historico[data];
 
-            const linha =
-                document.createElement("tr");
-
-            const colunaData =
-                document.createElement("td");
-
-            colunaData.className =
-                "historico-data";
-
-            colunaData.textContent =
-                formatarDataHistorico(data);
-
-            const coletaMin =
-                document.createElement("td");
-
-            coletaMin.className =
-                "historico-valor historico-min";
-
-            coletaMin.textContent =
-                formatarTemperatura(
-                    registro.coleta.minima
-                );
-
-            const coletaMedia =
-                document.createElement("td");
-
-            coletaMedia.className =
-                "historico-valor historico-media";
-
-            coletaMedia.textContent =
-                formatarTemperatura(
-                    registro.coleta.media
-                );
-
-            const coletaMax =
-                document.createElement("td");
-
-            coletaMax.className =
-                "historico-valor historico-max";
-
-            coletaMax.textContent =
-                formatarTemperatura(
-                    registro.coleta.maxima
-                );
-
-            const previsaoMin =
-                document.createElement("td");
-
-            previsaoMin.className =
-                "historico-valor historico-min";
-
-            previsaoMin.textContent =
-                formatarTemperatura(
-                    registro.previsao.minima
-                );
-
-            const previsaoMedia =
-                document.createElement("td");
-
-            previsaoMedia.className =
-                "historico-valor historico-media";
-
-            previsaoMedia.textContent =
-                formatarTemperatura(
-                    registro.previsao.media
-                );
-
-            const previsaoMax =
-                document.createElement("td");
-
-            previsaoMax.className =
-                "historico-valor historico-max";
-
-            previsaoMax.textContent =
-                formatarTemperatura(
-                    registro.previsao.maxima
-                );
-
-            // ==========================================
-            // DIFERENÇA - MÍNIMA
-            // ==========================================
-
-            const diferencaMin =
-                document.createElement("td");
-
-            diferencaMin.className =
-                "historico-valor historico-diferenca";
-
-            if (
-                valorNumericoValido(registro.coleta.minima) &&
-                valorNumericoValido(registro.previsao.minima)
-            ) {
-
-                const diferenca =
-                    Math.abs(
-                        Number(registro.coleta.minima) -
-                        Number(registro.previsao.minima)
+                const linha =
+                    document.createElement(
+                        "tr"
                     );
 
-                diferencaMin.textContent =
-                    `${diferenca
-                        .toFixed(1)
-                        .replace(".", ",")} °C`;
-
-            } else {
-
-                diferencaMin.textContent = "-";
-
-            }
-
-            // ==========================================
-            // DIFERENÇA - MÉDIA
-            // ==========================================
-
-            const diferencaMedia =
-                document.createElement("td");
-
-            diferencaMedia.className =
-                "historico-valor historico-diferenca";
-
-            if (
-                valorNumericoValido(registro.coleta.media) &&
-                valorNumericoValido(registro.previsao.media)
-            ) {
-
-                const diferenca =
-                    Math.abs(
-                        Number(registro.coleta.media) -
-                        Number(registro.previsao.media)
+                const colunaData =
+                    document.createElement(
+                        "td"
                     );
 
-                diferencaMedia.textContent =
-                    `${diferenca
-                        .toFixed(1)
-                        .replace(".", ",")} °C`;
+                colunaData.className =
+                    "historico-data";
 
-            } else {
-
-                diferencaMedia.textContent = "-";
-
-            }
-
-            // ==========================================
-            // DIFERENÇA - MÁXIMA
-            // ==========================================
-
-            const diferencaMax =
-                document.createElement("td");
-
-            diferencaMax.className =
-                "historico-valor historico-diferenca";
-
-            if (
-                valorNumericoValido(registro.coleta.maxima) &&
-                valorNumericoValido(registro.previsao.maxima)
-            ) {
-
-                const diferenca =
-                    Math.abs(
-                        Number(registro.coleta.maxima) -
-                        Number(registro.previsao.maxima)
+                colunaData.textContent =
+                    formatarDataHistorico(
+                        data
                     );
 
-                diferencaMax.textContent =
-                    `${diferenca
-                        .toFixed(1)
-                        .replace(".", ",")} °C`;
+                // ==========================================
+                // COLETA - MÍNIMA
+                // ==========================================
 
-            } else {
+                const coletaMin =
+                    document.createElement(
+                        "td"
+                    );
 
-                diferencaMax.textContent = "-";
+                coletaMin.className =
+                    "historico-valor historico-min";
 
+                coletaMin.textContent =
+                    formatarTemperatura(
+                        registro.coleta.minima
+                    );
+
+                // ==========================================
+                // COLETA - MÉDIA
+                // ==========================================
+
+                const coletaMedia =
+                    document.createElement(
+                        "td"
+                    );
+
+                coletaMedia.className =
+                    "historico-valor historico-media";
+
+                coletaMedia.textContent =
+                    formatarTemperatura(
+                        registro.coleta.media
+                    );
+
+                // ==========================================
+                // COLETA - MÁXIMA
+                // ==========================================
+
+                const coletaMax =
+                    document.createElement(
+                        "td"
+                    );
+
+                coletaMax.className =
+                    "historico-valor historico-max";
+
+                coletaMax.textContent =
+                    formatarTemperatura(
+                        registro.coleta.maxima
+                    );
+
+                // ==========================================
+                // PREVISÃO - MÍNIMA
+                // ==========================================
+
+                const previsaoMin =
+                    document.createElement(
+                        "td"
+                    );
+
+                previsaoMin.className =
+                    "historico-valor historico-min";
+
+                previsaoMin.textContent =
+                    formatarTemperatura(
+                        registro.previsao.minima
+                    );
+
+                // ==========================================
+                // PREVISÃO - MÉDIA
+                // ==========================================
+
+                const previsaoMedia =
+                    document.createElement(
+                        "td"
+                    );
+
+                previsaoMedia.className =
+                    "historico-valor historico-media";
+
+                previsaoMedia.textContent =
+                    formatarTemperatura(
+                        registro.previsao.media
+                    );
+
+                // ==========================================
+                // PREVISÃO - MÁXIMA
+                // ==========================================
+
+                const previsaoMax =
+                    document.createElement(
+                        "td"
+                    );
+
+                previsaoMax.className =
+                    "historico-valor historico-max";
+
+                previsaoMax.textContent =
+                    formatarTemperatura(
+                        registro.previsao.maxima
+                    );
+
+                // ==========================================
+                // DIFERENÇA - MÍNIMA
+                // ==========================================
+
+                const diferencaMin =
+                    document.createElement(
+                        "td"
+                    );
+
+                diferencaMin.className =
+                    "historico-valor historico-diferenca";
+
+                if (
+                    valorNumericoValido(
+                        registro.coleta.minima
+                    ) &&
+                    valorNumericoValido(
+                        registro.previsao.minima
+                    )
+                ) {
+
+                    const diferenca =
+                        Math.abs(
+                            Number(
+                                registro.coleta.minima
+                            ) -
+                            Number(
+                                registro.previsao.minima
+                            )
+                        );
+
+                    diferencaMin.textContent =
+                        `${diferenca
+                            .toFixed(1)
+                            .replace(".", ",")} °C`;
+
+                } else {
+
+                    diferencaMin.textContent =
+                        "-";
+                }
+
+                // ==========================================
+                // DIFERENÇA - MÉDIA
+                // ==========================================
+
+                const diferencaMedia =
+                    document.createElement(
+                        "td"
+                    );
+
+                diferencaMedia.className =
+                    "historico-valor historico-diferenca";
+
+                if (
+                    valorNumericoValido(
+                        registro.coleta.media
+                    ) &&
+                    valorNumericoValido(
+                        registro.previsao.media
+                    )
+                ) {
+
+                    const diferenca =
+                        Math.abs(
+                            Number(
+                                registro.coleta.media
+                            ) -
+                            Number(
+                                registro.previsao.media
+                            )
+                        );
+
+                    diferencaMedia.textContent =
+                        `${diferenca
+                            .toFixed(1)
+                            .replace(".", ",")} °C`;
+
+                } else {
+
+                    diferencaMedia.textContent =
+                        "-";
+                }
+
+                // ==========================================
+                // DIFERENÇA - MÁXIMA
+                // ==========================================
+
+                const diferencaMax =
+                    document.createElement(
+                        "td"
+                    );
+
+                diferencaMax.className =
+                    "historico-valor historico-diferenca";
+
+                if (
+                    valorNumericoValido(
+                        registro.coleta.maxima
+                    ) &&
+                    valorNumericoValido(
+                        registro.previsao.maxima
+                    )
+                ) {
+
+                    const diferenca =
+                        Math.abs(
+                            Number(
+                                registro.coleta.maxima
+                            ) -
+                            Number(
+                                registro.previsao.maxima
+                            )
+                        );
+
+                    diferencaMax.textContent =
+                        `${diferenca
+                            .toFixed(1)
+                            .replace(".", ",")} °C`;
+
+                } else {
+
+                    diferencaMax.textContent =
+                        "-";
+                }
+
+                // ==========================================
+                // ADICIONAR COLUNAS
+                // ==========================================
+
+                linha.appendChild(
+                    colunaData
+                );
+
+                linha.appendChild(
+                    coletaMin
+                );
+
+                linha.appendChild(
+                    coletaMedia
+                );
+
+                linha.appendChild(
+                    coletaMax
+                );
+
+                linha.appendChild(
+                    previsaoMin
+                );
+
+                linha.appendChild(
+                    previsaoMedia
+                );
+
+                linha.appendChild(
+                    previsaoMax
+                );
+
+                linha.appendChild(
+                    diferencaMin
+                );
+
+                linha.appendChild(
+                    diferencaMedia
+                );
+
+                linha.appendChild(
+                    diferencaMax
+                );
+
+                historicoTabela.appendChild(
+                    linha
+                );
             }
-
-            linha.appendChild(colunaData);
-
-            linha.appendChild(coletaMin);
-            linha.appendChild(coletaMedia);
-            linha.appendChild(coletaMax);
-
-            linha.appendChild(previsaoMin);
-            linha.appendChild(previsaoMedia);
-            linha.appendChild(previsaoMax);
-
-            linha.appendChild(diferencaMin);
-            linha.appendChild(diferencaMedia);
-            linha.appendChild(diferencaMax);
-
-            historicoTabela.appendChild(linha);
-
-        });
+        );
 
     } catch (erro) {
 
@@ -1591,9 +2251,7 @@ async function carregarHistorico() {
                 </td>
             </tr>
         `;
-
     }
-
 }
 
 // ==========================================
@@ -1605,22 +2263,41 @@ const historicoPrevisoesTabela =
         "historico-previsoes-body"
     );
 
-function formatarDataHoraPrevisao(data) {
+function formatarDataHoraPrevisao(
+    data
+) {
 
-    if (!data) return "--";
+    if (!data) {
+        return "--";
+    }
 
-    const texto = String(data);
+    const texto =
+        String(data);
 
-    if (texto.includes(" ")) {
+    if (
+        /^\d{2}\/\d{2}\/\d{4} /.test(
+            texto
+        )
+    ) {
 
-        const partes = texto.split(" ");
+        return texto;
+    }
+
+    if (
+        texto.includes(" ")
+    ) {
+
+        const partes =
+            texto.split(" ");
 
         if (partes.length >= 2) {
 
             const partesData =
                 partes[0].split("-");
 
-            if (partesData.length === 3) {
+            if (
+                partesData.length === 3
+            ) {
 
                 return (
                     partesData[2] +
@@ -1631,15 +2308,40 @@ function formatarDataHoraPrevisao(data) {
                     " " +
                     partes[1].substring(0, 5)
                 );
-
             }
-
         }
-
     }
 
-    return formatarDataHistorico(texto);
+    if (
+        texto.includes("T")
+    ) {
 
+        const partes =
+            texto.split("T");
+
+        const partesData =
+            partes[0].split("-");
+
+        if (
+            partesData.length === 3
+        ) {
+
+            return (
+                partesData[2] +
+                "/" +
+                partesData[1] +
+                "/" +
+                partesData[0] +
+                " " +
+                (partes[1] || "")
+                    .substring(0, 5)
+            );
+        }
+    }
+
+    return formatarDataHistorico(
+        texto
+    );
 }
 
 // ==========================================
@@ -1672,7 +2374,6 @@ async function carregarHistoricoPrevisoes() {
             throw new Error(
                 "Erro ao carregar histórico de previsões."
             );
-
         }
 
         const dados =
@@ -1686,12 +2387,13 @@ async function carregarHistoricoPrevisoes() {
 
         if (
             dados &&
-            Array.isArray(dados.dados)
+            Array.isArray(
+                dados.dados
+            )
         ) {
 
             registros =
                 dados.dados;
-
         }
 
         if (
@@ -1708,103 +2410,222 @@ async function carregarHistoricoPrevisoes() {
             `;
 
             return;
-
         }
 
+        // ==========================================
+        // CORREÇÃO PRINCIPAL
+        // ==========================================
+        // Para cada Data_Prevista, manter apenas
+        // a previsão cuja Data_Execucao é a mais recente.
+        // ==========================================
+
         registros =
-            [...registros].reverse();
-
-        registros.forEach(function(item) {
-
-            const linha =
-                document.createElement("tr");
-
-            const colunaExecucao =
-                document.createElement("td");
-
-            colunaExecucao.textContent =
-                formatarDataHoraPrevisao(
-                    item.Data_Execucao ??
-                    item.data_execucao
-                );
-
-            const colunaDataPrevista =
-                document.createElement("td");
-
-            colunaDataPrevista.textContent =
-                formatarDataHistorico(
-                    item.Data_Prevista ??
-                    item.data_prevista
-                );
-
-            const colunaMediaPrevista =
-                document.createElement("td");
-
-            colunaMediaPrevista.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Media_Prevista_C ??
-                    item.temp_media_prevista_c
-                );
-
-            const colunaMinPrevista =
-                document.createElement("td");
-
-            colunaMinPrevista.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Min_Prevista_C ??
-                    item.temp_min_prevista_c
-                );
-
-            const colunaMaxPrevista =
-                document.createElement("td");
-
-            colunaMaxPrevista.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Max_Prevista_C ??
-                    item.temp_max_prevista_c
-                );
-
-            const colunaMediaReal =
-                document.createElement("td");
-
-            colunaMediaReal.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Media_API_Externa_C ??
-                    item.temp_media_api_externa_c
-                );
-
-            const colunaMinReal =
-                document.createElement("td");
-
-            colunaMinReal.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Min_API_Externa_C ??
-                    item.temp_min_api_externa_c
-                );
-
-            const colunaMaxReal =
-                document.createElement("td");
-
-            colunaMaxReal.textContent =
-                formatarTemperaturaHistorico(
-                    item.Temp_Max_API_Externa_C ??
-                    item.temp_max_api_externa_c
-                );
-
-            linha.appendChild(colunaExecucao);
-            linha.appendChild(colunaDataPrevista);
-            linha.appendChild(colunaMediaPrevista);
-            linha.appendChild(colunaMinPrevista);
-            linha.appendChild(colunaMaxPrevista);
-            linha.appendChild(colunaMediaReal);
-            linha.appendChild(colunaMinReal);
-            linha.appendChild(colunaMaxReal);
-
-            historicoPrevisoesTabela.appendChild(
-                linha
+            selecionarUltimaPrevisaoPorDia(
+                registros
             );
 
-        });
+        // Ordenar da data prevista mais recente
+        // para a mais antiga.
+
+        registros.sort(
+            function(a, b) {
+
+                const dataA =
+                    obterTimestamp(
+                        a.Data_Prevista ??
+                        a.data_prevista
+                    );
+
+                const dataB =
+                    obterTimestamp(
+                        b.Data_Prevista ??
+                        b.data_prevista
+                    );
+
+                if (
+                    Number.isFinite(dataA) &&
+                    Number.isFinite(dataB)
+                ) {
+
+                    return dataB - dataA;
+                }
+
+                return 0;
+            }
+        );
+
+        registros.forEach(
+            function(item) {
+
+                const linha =
+                    document.createElement(
+                        "tr"
+                    );
+
+                // ==========================================
+                // DATA DE EXECUÇÃO
+                // ==========================================
+
+                const colunaExecucao =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaExecucao.textContent =
+                    formatarDataHoraPrevisao(
+                        item.Data_Execucao ??
+                        item.data_execucao
+                    );
+
+                // ==========================================
+                // DATA PREVISTA
+                // ==========================================
+
+                const colunaDataPrevista =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaDataPrevista.textContent =
+                    formatarDataHistorico(
+                        item.Data_Prevista ??
+                        item.data_prevista
+                    );
+
+                // ==========================================
+                // MÉDIA PREVISTA
+                // ==========================================
+
+                const colunaMediaPrevista =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMediaPrevista.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Media_Prevista_C ??
+                        item.temp_media_prevista_c ??
+                        item.previsao?.media
+                    );
+
+                // ==========================================
+                // MÍNIMA PREVISTA
+                // ==========================================
+
+                const colunaMinPrevista =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMinPrevista.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Min_Prevista_C ??
+                        item.temp_min_prevista_c ??
+                        item.previsao?.minima
+                    );
+
+                // ==========================================
+                // MÁXIMA PREVISTA
+                // ==========================================
+
+                const colunaMaxPrevista =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMaxPrevista.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Max_Prevista_C ??
+                        item.temp_max_prevista_c ??
+                        item.previsao?.maxima
+                    );
+
+                // ==========================================
+                // MÉDIA REAL
+                // ==========================================
+
+                const colunaMediaReal =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMediaReal.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Media_API_Externa_C ??
+                        item.temp_media_api_externa_c
+                    );
+
+                // ==========================================
+                // MÍNIMA REAL
+                // ==========================================
+
+                const colunaMinReal =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMinReal.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Min_API_Externa_C ??
+                        item.temp_min_api_externa_c
+                    );
+
+                // ==========================================
+                // MÁXIMA REAL
+                // ==========================================
+
+                const colunaMaxReal =
+                    document.createElement(
+                        "td"
+                    );
+
+                colunaMaxReal.textContent =
+                    formatarTemperaturaHistorico(
+                        item.Temp_Max_API_Externa_C ??
+                        item.temp_max_api_externa_c
+                    );
+
+                // ==========================================
+                // ADICIONAR COLUNAS
+                // ==========================================
+
+                linha.appendChild(
+                    colunaExecucao
+                );
+
+                linha.appendChild(
+                    colunaDataPrevista
+                );
+
+                linha.appendChild(
+                    colunaMediaPrevista
+                );
+
+                linha.appendChild(
+                    colunaMinPrevista
+                );
+
+                linha.appendChild(
+                    colunaMaxPrevista
+                );
+
+                linha.appendChild(
+                    colunaMediaReal
+                );
+
+                linha.appendChild(
+                    colunaMinReal
+                );
+
+                linha.appendChild(
+                    colunaMaxReal
+                );
+
+                historicoPrevisoesTabela.appendChild(
+                    linha
+                );
+            }
+        );
 
     } catch (erro) {
 
@@ -1820,18 +2641,21 @@ async function carregarHistoricoPrevisoes() {
                 </td>
             </tr>
         `;
-
     }
-
 }
 
 // ==========================================
 // FORMATAR TEMPERATURA DO HISTÓRICO
 // ==========================================
 
-function formatarTemperaturaHistorico(valor) {
+function formatarTemperaturaHistorico(
+    valor
+) {
 
-    if (!valorNumericoValido(valor)) {
+    if (
+        !valorNumericoValido(valor)
+    ) {
+
         return "--";
     }
 
@@ -1841,7 +2665,6 @@ function formatarTemperaturaHistorico(valor) {
             .replace(".", ",")
         + " °C"
     );
-
 }
 
 // ==========================================
@@ -1857,10 +2680,8 @@ if (metricSelect) {
             carregarGrafico(
                 this.value
             );
-
         }
     );
-
 }
 
 // ==========================================
@@ -1874,10 +2695,8 @@ if (historicoFonte) {
         function() {
 
             carregarHistorico();
-
         }
     );
-
 }
 
 // ==========================================
@@ -1891,10 +2710,8 @@ if (historicoPeriodo) {
         function() {
 
             carregarHistorico();
-
         }
     );
-
 }
 
 // ==========================================
@@ -1911,7 +2728,9 @@ function mostrarLoadingAtualizacao() {
     if (!overlay) {
 
         overlay =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
         overlay.id =
             "atualizacao-overlay";
@@ -1935,16 +2754,19 @@ function mostrarLoadingAtualizacao() {
             </div>
         `;
 
-        document.body.appendChild(overlay);
-
+        document.body.appendChild(
+            overlay
+        );
     }
 
-    requestAnimationFrame(function() {
+    requestAnimationFrame(
+        function() {
 
-        overlay.classList.add("ativo");
-
-    });
-
+            overlay.classList.add(
+                "ativo"
+            );
+        }
+    );
 }
 
 function esconderLoadingAtualizacao() {
@@ -1955,9 +2777,11 @@ function esconderLoadingAtualizacao() {
         );
 
     if (overlay) {
-        overlay.classList.remove("ativo");
-    }
 
+        overlay.classList.remove(
+            "ativo"
+        );
+    }
 }
 
 // ==========================================
@@ -1970,7 +2794,8 @@ if (updateButton) {
         "click",
         async function() {
 
-            updateButton.disabled = true;
+            updateButton.disabled =
+                true;
 
             mostrarLoadingAtualizacao();
 
@@ -1995,7 +2820,6 @@ if (updateButton) {
                     window.location.reload();
 
                     return;
-
                 }
 
                 console.error(
@@ -2025,19 +2849,17 @@ if (updateButton) {
 
                 updateButton.disabled =
                     false;
-
             }
-
         }
     );
-
 }
 
 // ==========================================
 // ATUALIZAÇÃO AUTOMÁTICA
 // ==========================================
 
-let intervaloAtualizacao = null;
+let intervaloAtualizacao =
+    null;
 
 async function atualizarDadosAutomaticamente() {
 
@@ -2054,12 +2876,16 @@ async function atualizarDadosAutomaticamente() {
             metricaAtual
         );
 
-        // Previsão primeiro.
-        // Depois Climatempo.
-        // A diferença só é calculada após os dois.
+        // ==========================================
+        // PREVISÃO PRIMEIRO
+        // ==========================================
 
         const previsaoModelo =
             await carregarPrevisao();
+
+        // ==========================================
+        // CLIMATEMPO DEPOIS
+        // ==========================================
 
         await carregarClimatempo(
             previsaoModelo
@@ -2076,7 +2902,6 @@ async function atualizarDadosAutomaticamente() {
         ) {
 
             await carregarHistorico();
-
         }
 
         const telaPrevisoes =
@@ -2090,7 +2915,6 @@ async function atualizarDadosAutomaticamente() {
         ) {
 
             await carregarHistoricoPrevisoes();
-
         }
 
     } catch (erro) {
@@ -2099,9 +2923,7 @@ async function atualizarDadosAutomaticamente() {
             "Erro na atualização automática:",
             erro
         );
-
     }
-
 }
 
 // ==========================================
@@ -2115,7 +2937,6 @@ function iniciarAtualizacaoAutomatica() {
         clearInterval(
             intervaloAtualizacao
         );
-
     }
 
     intervaloAtualizacao =
@@ -2123,7 +2944,6 @@ function iniciarAtualizacaoAutomatica() {
             atualizarDadosAutomaticamente,
             60000
         );
-
 }
 
 // ==========================================
@@ -2137,9 +2957,7 @@ document.addEventListener(
         if (!document.hidden) {
 
             atualizarDadosAutomaticamente();
-
         }
-
     }
 );
 
@@ -2149,11 +2967,14 @@ document.addEventListener(
 
 async function iniciar() {
 
-    mostrarTela("tela-inicial");
+    mostrarTela(
+        "tela-inicial"
+    );
 
     await carregarDados();
 
     await carregarGrafico(
+
         metricSelect
             ? metricSelect.value
             : "temperatura"
@@ -2170,15 +2991,11 @@ async function iniciar() {
     // SEGUNDO: CLIMATEMPO
     // ==========================================
 
-    // carregarClimatempo espera a resposta
-    // externa e só então calcula a diferença.
-
     await carregarClimatempo(
         previsaoModelo
     );
 
     iniciarAtualizacaoAutomatica();
-
 }
 
 // ==========================================
@@ -2192,6 +3009,5 @@ document.addEventListener(
         configurarNavegacao();
 
         iniciar();
-
     }
 );

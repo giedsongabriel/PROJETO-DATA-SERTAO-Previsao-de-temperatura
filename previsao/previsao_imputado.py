@@ -284,11 +284,6 @@ input_ultimo_dia, data_ultimo_registro = obter_dados_ultimo_dia(
 
 previsao_proximas_24h = modelo.predict(input_ultimo_dia)[0]
 
-
-# ============================================================
-# 6. CALCULAR MÉTRICAS PREVISTAS (COM MODELOS DE ALTA PRECISÃO)
-# ============================================================
-
 if modelo_media is not None:
   temp_media_prevista = float(modelo_media.predict(input_ultimo_dia)[0])
   temp_min_prevista = float(modelo_min.predict(input_ultimo_dia)[0])
@@ -297,6 +292,7 @@ else:
   temp_media_prevista = np.mean(previsao_proximas_24h)
   temp_min_prevista = np.min(previsao_proximas_24h)
   temp_max_prevista = np.max(previsao_proximas_24h)
+  print("alooooooooo")
 
 data_previsao = (data_ultimo_registro + timedelta(days=1)).strftime("%Y-%m-%d")
 
